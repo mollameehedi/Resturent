@@ -1,10 +1,17 @@
 import React, {Component} from 'react';
 import DISHES from '../../data/dishes';
 import MenuItem from './MenuItem';
+import DishDetail from './DishDetail';
 
 class Menu extends Component {
     state = {
         dishes : DISHES,
+        selectedDish : null,
+    }
+
+    onDishSelect = dish => {
+        console.log(dish);
+        this.setState({selectedDish : dish})
     }
 
     render(){
@@ -14,16 +21,23 @@ class Menu extends Component {
                 <MenuItem
                     dish={item}
                     key={item.id}
+                    DishSelect={ () => this.onDishSelect(item)}
                 />
              );
         })
+        let dishDetail = null ;
+        if (this.state.selectedDish != null) {
+            dishDetail = <DishDetail dish={this.state.selectedDish} />
+        }
         return(
             <div className="container">
                 <div className="row">
                     <div className="col-lg-6">
                         {menu}
                     </div>
-                    <div className="col-lg-6"></div>
+                    <div className="col-lg-6">
+                        {dishDetail}
+                    </div>
                 </div>
             </div>
         );
