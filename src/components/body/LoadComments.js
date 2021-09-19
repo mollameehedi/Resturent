@@ -3,15 +3,17 @@ import dateFormat from 'dateformat';
 
 const LoadComments = props => {
     return(
-        props.comments.map( comment => {
+        props.comments.map(comment => {
             return(
                 <div key={comment.id}>
-                <h5>{comment.author}</h5>
-                <p>{comment.comment}</p>
-                <p>{dateFormat(comment.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
-            </div>
-            )
+                    <h4>{comment.author}</h4>
+                    <p>{comment.comment}</p>
+                    <p>Rating : {comment.rating}</p>
+                    <p>{dateFormat(comment.date, "dddd, mmmm dS, yyyy, h:MM TT")}</p>
+                </div>
+            );
         })
+       
     );
 }
 
