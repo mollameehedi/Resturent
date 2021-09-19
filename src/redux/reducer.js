@@ -4,8 +4,20 @@ import { combineReducers } from 'redux';
 import * as actionType from './actionTypes';
 
 
-const dishReducer = (dishState = DISHES, action) => {
+const dishReducer = (dishState ={ isLoading: false, dishes:[] }, action) => {
    switch(action.type){
+       case actionType.DISHES_LOADING:
+           return{
+               ...dishState,
+               isLoading: true,
+           }
+
+        case actionType.LOAD_DISHES:
+            return{
+                ...dishState,
+                isLoading:false,
+                dishes:action.payload
+            }
 
        default:
            return dishState;
