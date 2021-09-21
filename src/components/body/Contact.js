@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import {Button, FormGroup, Label, Col} from 'reactstrap'
-import {Control, Errors, LocalForm} from 'react-redux-form';
+import {Form ,Control, Errors, actions} from 'react-redux-form';
+import { connect } from 'react-redux';
 
+
+const mapDispatchToProps = dispatch => {
+    return{
+        resetFeeedbackForm: () => {
+            dispatch(actions.reset('feedback'))
+        }
+    }
+}
 
 const required = val => val && val.length;
 const isNumber = val => !isNaN(Number(val));
@@ -11,6 +20,7 @@ const validatEmail = val => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test
 class Contact extends Component{
     handleSubmit = values => {
         console.log(values);
+        this.props.resetFeeedbackForm()
     }
     render(){
         document.title = 'Contact | Resturent';
@@ -21,7 +31,7 @@ class Contact extends Component{
                         <h3>Sent Us Your Feedback</h3>
                     </div>
                     <div className='col-12 col-md-7'> 
-                    <LocalForm onSubmit={values => this.handleSubmit(values)}>
+                    <Form model='feedback' onSubmit={values => this.handleSubmit(values)}>
                         <FormGroup row>
                         <Label htmlFor="firstname" md={2}>First Name</Label>
                         <Col md={10}>
@@ -116,7 +126,7 @@ class Contact extends Component{
                                         messages={
                                             {
                                                 required:'required, ',
-                                                isNumber: 'invalid mail'
+                                                validatEmail: 'invalid mail'
                                             }
                                         }
                                      />
@@ -174,7 +184,7 @@ class Contact extends Component{
                                     <Button  type='submit' color='primary' >Send Feedback</Button>
                             </Col>
                         </FormGroup>
-                    </LocalForm>
+                    </Form>
                     </div>
                 </div>
             </div>
@@ -182,4 +192,4 @@ class Contact extends Component{
     }
 }
 
-export default Contact;
+export default connect(null,mapDispatchToProps)(Contact);
