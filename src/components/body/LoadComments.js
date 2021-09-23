@@ -1,7 +1,14 @@
 import React from 'react';
 import dateFormat from 'dateformat';
+import Loading from './Loading';
 
 const LoadComments = props => {
+    if (props.commentsIsLoading) {
+       return(
+        <Loading/>
+       )
+    }
+    else{
     return(
         props.comments.map(comment => {
             return(
@@ -15,6 +22,7 @@ const LoadComments = props => {
         })
        
     );
+    }
 }
 
 export default LoadComments;
