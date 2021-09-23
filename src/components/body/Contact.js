@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => {
 
 const required = val => val && val.length;
 const isNumber = val => !isNaN(Number(val));
-const validatEmail = val => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val);
+const validEmail = val => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val);
 
 
 class Contact extends Component{
@@ -116,7 +116,7 @@ class Contact extends Component{
                                 className='form-control'
                                 validators={{ 
                                     required,
-                                    validatEmail
+                                    validEmail
                                  }}
                                 />
                                  <Errors
@@ -126,7 +126,7 @@ class Contact extends Component{
                                         messages={
                                             {
                                                 required:'required, ',
-                                                validatEmail: 'invalid mail'
+                                                validEmail: 'invalid mail'
                                             }
                                         }
                                      />
